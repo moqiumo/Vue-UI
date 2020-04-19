@@ -2,27 +2,100 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>vue</title>
+		<title>vue练习</title>
 		<script src="../js/vue.js"></script>
+		<style>
+			//解决第一次加载会有默认的字段显示
+			[v-cloak] {
+				display: none;
+			}
+		</style>
 	</head>
 	<body>
-		<div id="exam">
-			<p>这个是第一个test数据：{{message1}}</p>
-			<p>这个是第二个test数据：{{message2}}</p>
+		<div id="app1">
+			<span v-cloak>{{message}}</span>
+		</div>
+		<div id="app2">
+			<span v-text="message2"></span>
+			<span v-html="message3"></span>
+			<span v-pre>{{message4}}</span><br/><!-- 不编译 -->
+			<span v-once>{{message5}}</span><!-- 只编译一次，后续有改的展示不变 -->
+		</div>
+		<div id="app3">
+			<span v-text="msg"></span>
+			<input type="text" v-model="msg">
+		</div>
+		<div id="app4">
+			{{num}}
+			<button  v-on:click.stop='add'>增加</button>
+			<button v-on:click="decrease(122,$event)">减少</button>
+			<a href="https://www.baidu.com" target="_blank" v-on:click.stop.prevent="add">点击</a>
+		</div>
+		<div id="app5">
+			<form action="">
+				<div>
+					账号：<input type="text" v-model="userName" v-on:keyup.delete="delete1"/>
+				</div>
+				<div>
+					密码：<input type="text" v-model="passWord" v-on:keyup.enter="handle"/>
+				</div>
+				<input type="button" value="提交" v-on:click.enter="handle"/>
+			</form>
 		</div>
 	</body>
+	
 </html>
 <script>
-	var app = new Vue({
-		el: '#exam',
+	var app1 = new Vue({
+		el: '#app1',
 		data: {
-			message1: 'Hello'
+			message: 'hello Vue!1'
+		}
+	})
+	var app2 = new Vue({
+		el: '#app2',
+		data: {
+			message2: 'v-text效果',
+			message3: '<h1>v-html的效果</h1>',
+			message4: 'sdfnasjk',
+			message5: '只编译一次'
+		}
+	})
+	var app3 = new Vue({
+		el: '#app3',
+		data: {
+			msg: 'sdfjai'
+		}
+	})
+	var app4 = new Vue({
+		el: '#app4',
+		data: {
+			num: 0
 		},
-		computed: {
-			//计算属性的getter
-			message2:function(){
-				//this指向vm实例
-				return this.message1.split('').reverse().join('');
+		methods: {
+			add: function(event){
+				console.log(event.target.Element);
+				this.num++;
+			},
+			decrease: function(p,event){
+				console.log(event.target.innerHTML);
+				this.num = this.num - p;
+			}
+		}
+	})
+	var app5 = new Vue({
+		el: '#app5',
+		data: {
+			userName: 'CL',
+			passWord: '123455'
+		},
+		methods: {
+			delete1: function(){
+				//按delete键删除输入框内容
+				this.userName = '';
+			},
+			handle: function(){
+				console.log("1223");
 			}
 		}
 	})
