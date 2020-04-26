@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>路由</title>
+		<script src="../js/vue.js"></script>
+		<script src="https://cdn.bootcss.com/vue-router/2.5.3/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<router-link to="/user">User</router-link>
+			<router-link to="resiger">resiger</router-link>
+			
+			<!-- 路由占位符，组件引入写在下面 -->
+			<router-view></router-view>
+		</div>
+	</body>
+</html>
+<script>
+	const User = {
+		template: '<h1>User组件</h1>'
+	} 
+	const Resiger = {
+		template: '<h1>Resiger组件</h1>'
+	}
+	var router = new VueRouter({
+		//routes 路由规则数组
+		routes: [
+			//path 当前路由匹配规则匹配的hash地址
+			//component 展示的组件
+			//redirect 重定向
+			{path: '/', redirect: '/user'},
+			{path: '/user', component: User},
+			{path: '/resiger', component: Resiger}
+		]
+	})
+	var app = new Vue({
+		el: '#app',
+		data: {},
+		//挂载路由对象
+		router: router
+	})
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>样式绑定</title>
+		<script src="../js/vue.js"></script>
+		<style type="text/css">
+			.demo1 {
+				border: 1px solid red;
+				width: 100px;
+				height: 100px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div v-bind:class="{demo1:isDemo}"></div>
+			<button v-on:click="handle">切换</button>
+		</div>
+	</body>
+</html>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			isDemo: true
+		},
+		methods: {
+			handle: function(){
+				this.isDemo = false;
+			}
+		}
+	}) 
+</script>

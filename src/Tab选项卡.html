@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>tab选项卡</title>
+		<script src="../js/vue.js"></script>
+		<style type="text/css">
+			
+			ul {
+				list-style-type: none;
+				width: 156px;
+				height: 40px;
+				/* overflow: hidden; */
+				/* border: 1px solid aqua; */
+			}
+			li {
+				display: block;
+				float: left;
+				width: 50px;
+				height: 20px;
+				border: 1px solid red;
+				text-align: center;
+			}
+			.tab ul li.active {
+			  background-color: orange;
+			}
+			.tab div{
+				display: none;
+			}
+			.tab div.current {
+			  display: block;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="tab">
+				<ul>
+					<li v-on:click='change(index)'  :class='currentIndex==index?"active":""'
+					 :key='list.index'  v-for="(list, index) in lists">{{list.tabName}}</li>
+				<ul><br/>
+				
+				<div :class='currentIndex==index?"current":""' v-for="(list, index) in lists">
+					<img :src="list.gift">
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			currentIndex: 0,
+			lists: [
+				{
+					id: 1,
+					tabName: 'RNG',
+					gift: '../img/rng.png'
+				},
+				{
+					id: 2,
+					tabName: 'ES',
+					gift: '../img/es.png'
+				},
+				{
+					id: 3,
+					tabName: 'AG',
+					gift: '../img/ag.png'
+				}
+			]
+		},
+		methods: {
+			change: function(index){
+				this.currentIndex = index;
+			}
+		}
+	});
+</script>

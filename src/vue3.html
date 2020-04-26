@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>学习中</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app"> 
+			<input v-model.number="age"/>
+			<input v-model.trim.lazy="string"/>
+			文本框：{{string}}
+		</div>
+	</body>
+</html>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			age: '1',
+			string: 'ss'
+		}
+	})
+</script>
